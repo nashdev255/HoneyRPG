@@ -22,10 +22,12 @@ class BattleField {
         void showBattleFieldStatus();
 
         void endBattle();
-        void endBattleMessage();
 
-        void gameOver();
+        bool canEndBattle();
+        bool isVictory();
+
         void win();
+        void lose();
 
     public:
         BattleField() {};

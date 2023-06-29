@@ -24,7 +24,6 @@ class BattleField {
         void endBattle();
 
         bool canEndBattle();
-        bool isVictory();
 
         void win();
         void lose();
@@ -33,6 +32,8 @@ class BattleField {
         BattleField() {};
         BattleField(Fighter* fighter, Monster* monster);
         virtual ~BattleField() {};
+
+        bool isVictory();
 
         // getter, setter
         bool getTurn();

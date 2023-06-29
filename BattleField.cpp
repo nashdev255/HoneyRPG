@@ -17,7 +17,12 @@ void BattleField :: cycleTurn() {
     this->monster->showStatus();
     this->startTurn();
     this->switchTurn();
-    if(this->canEndBattle()) this->endBattle();
+
+    if(this->canEndBattle()) {
+        this->endBattle();
+        return;
+    }
+    
     this->cycleTurn();
 }
 
@@ -50,14 +55,16 @@ void BattleField :: switchTurn() {
 }
 
 void BattleField :: endBattle() {
-    if(this->isVictory()) this->win();
-    this->lose();
+    if(this->isVictory()) {
+        this->win();
+    } else {
+        this->lose();
+    }
 }
 
 bool BattleField :: canEndBattle() {
-    if(this->fighter->isAlive() == false || this->monster->isAlive() == false) {
-        return true;
-    }
+    if(this->fighter->isAlive() == false || this->monster->isAlive() == false) return true;
+    std::cout << "debug" << std::endl;
     return false;
 }
 
@@ -70,6 +77,7 @@ bool BattleField :: isVictory() {
 
 void BattleField :: win() {
     std::cout << "you win!!!" << std::endl;
+    // provide exp for fighter
 }
 
 void BattleField :: lose() {

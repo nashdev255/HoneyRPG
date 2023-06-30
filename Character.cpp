@@ -59,15 +59,30 @@ void Character :: updateReqExp() {
     this->reqExp = calcReqExpAmount();
 }
 
+void Character :: updateExp() {
+    this->exp = this->exp - this->reqExp;
+}
+
 void Character :: updateLevel() {
     while(this->reqExp <= this->exp) {
         if(this->level == this->maxLevel) {
             break;
         }
 
-        this->level++;
+        updateExp();
+        levelUp();
+        updateReqExp();
+
         std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
     }
+}
+
+void Character :: levelUp() {
+    this->level++;
+}
+
+void Character :: earnExpFromEnemy(int dropExpAmount) {
+    this->exp = this->exp + dropExpAmount;
 }
 
 int Character :: calcReqExpAmount() {

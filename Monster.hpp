@@ -20,8 +20,19 @@ class Monster : public Character {
         void initAttackMethod();
         void randomAttack(Fighter& fighter);
 
+        int getDropExpAmount();
+        void setDropExpAmount(int dropExpAmount);
+
 };
 
 inline Monster :: Monster(std::string const name, ElementalAttribute const element, int const maxhp, int const atk, int const def, int const spd, int dropExpAmount) : Character(name, element, maxhp, atk, def, spd), dropExpAmount(dropExpAmount) {
     this->initAttackMethod();
+}
+
+inline int Monster :: getDropExpAmount() {
+    return this->dropExpAmount;
+}
+
+inline void  Monster :: setDropExpAmount(int dropExpAmount) {
+    this->dropExpAmount = dropExpAmount;
 }

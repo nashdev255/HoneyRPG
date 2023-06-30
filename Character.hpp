@@ -38,8 +38,11 @@ class Character {
         virtual void deadMessage() {};
 
         // level-related
+        void earnExpFromEnemy(int dropExpAmount);
         virtual void updateReqExp();
+        void updateExp();
         void updateLevel();
+        void levelUp();
 
         // getter, setter
         std::string getName();

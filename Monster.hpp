@@ -7,10 +7,11 @@ class Fighter;
 
 class Monster : public Character {
     private:
+        int dropExpAmount;
 
     public:
         Monster() {};
-        Monster(std::string name, ElementalAttribute element, int maxhp, int atk, int def, int spd);
+        Monster(std::string name, ElementalAttribute element, int maxhp, int atk, int def, int spd, int dropExpAmount);
         virtual ~Monster() {};
 
         virtual void damagedMessage(int const damagePoint);
@@ -21,6 +22,6 @@ class Monster : public Character {
 
 };
 
-inline Monster :: Monster(std::string const name, ElementalAttribute const element, int const maxhp, int const atk, int const def, int const spd) : Character(name, element, maxhp, atk, def, spd) {
+inline Monster :: Monster(std::string const name, ElementalAttribute const element, int const maxhp, int const atk, int const def, int const spd, int dropExpAmount) : Character(name, element, maxhp, atk, def, spd), dropExpAmount(dropExpAmount) {
     this->initAttackMethod();
 }

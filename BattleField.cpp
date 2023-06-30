@@ -78,6 +78,7 @@ bool BattleField :: isVictory() {
 void BattleField :: win() {
     std::cout << "you win!!!" << std::endl;
     // provide exp for fighter
+    this->fighter->updateReqExp();
 }
 
 void BattleField :: lose() {

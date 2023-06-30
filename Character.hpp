@@ -22,6 +22,7 @@ class Character {
     private:
         double calcDamageMagnification(Character attacker);
         int calcReqExpAmount();
+        std::string coloredHp();
 
     public:
         Character() {};

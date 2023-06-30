@@ -6,7 +6,7 @@ void Character :: showStatus() {
     std::cout << "NAME : " << this->name << std::endl;
     std::cout << "LEVEL : " << this->level << std::endl;
     std::cout << "ELEMENT : " << this->elementalAttribute.getElementAsString(this->elementalAttribute.getElement()) << std::endl;
-    std::cout << "HP : " << this->hp << '/' << this->maxhp << std::endl;
+    std::cout << "HP : " << this->coloredHp() << '/' << this->maxhp << std::endl;
     std::cout << "ATK : " << this->atk << std::endl;
     std::cout << "DEF : " << this->def << std::endl;
     std::cout << "SPD : " << this->spd << std::endl;
@@ -30,6 +30,25 @@ double Character :: calcDamageMagnification(Character attacker) {
     if(elementalReaction == NoneReact) { std::cout << "debug" << std::endl; return 1.0; } 
     if(elementalReaction == Saturate) return 0.5;
     return 1.8;
+}
+
+std::string Character :: coloredHp() {
+    double redRatio = 0.2;
+    double yellowRatio = 0.5;
+    // default green
+    double restHpRatio = double(this->hp) / double(this->maxhp);
+
+    std::cout << "debug : " << this->hp << "/" << this->maxhp << "=" << restHpRatio << std::endl;
+
+    std::string coloredHp = "\x1b[38;2;127;255;0m " + std::to_string(this->hp) + "\x1b[m";
+
+    if(restHpRatio < redRatio) {
+        coloredHp = "\x1b[38;2;255;69;0m " + std::to_string(this->hp) + " \x1b[m";
+    } else if(restHpRatio < yellowRatio) {
+        coloredHp = "\x1b[38;2;0;255;0m " + std::to_string(this->hp) + " \x1b[m";
+    }
+
+    return coloredHp;
 }
 
 void Character :: dead() {

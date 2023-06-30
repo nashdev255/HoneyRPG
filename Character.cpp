@@ -59,6 +59,17 @@ void Character :: updateReqExp() {
     this->reqExp = calcReqExpAmount();
 }
 
+void Character :: updateLevel() {
+    while(this->reqExp <= this->exp) {
+        if(this->level == this->maxLevel) {
+            break;
+        }
+
+        this->level++;
+        std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
+    }
+}
+
 int Character :: calcReqExpAmount() {
     const int totalReqExpAmount = this->level*100;
     return totalReqExpAmount;

@@ -14,6 +14,7 @@ class Character {
         int hp, maxhp, atk, def, spd;
 
         int level;
+        int maxLevel = 100;
         int exp, reqExp;
 
         std::vector<AttackMethod> attackMethod;
@@ -38,6 +39,7 @@ class Character {
 
         // level-related
         virtual void updateReqExp();
+        void updateLevel();
 
         // getter, setter
         std::string getName();

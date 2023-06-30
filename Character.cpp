@@ -36,16 +36,15 @@ std::string Character :: coloredHp() {
     double redRatio = 0.2;
     double yellowRatio = 0.5;
     // default green
+
     double restHpRatio = double(this->hp) / double(this->maxhp);
 
-    std::cout << "debug : " << this->hp << "/" << this->maxhp << "=" << restHpRatio << std::endl;
-
-    std::string coloredHp = "\x1b[38;2;127;255;0m " + std::to_string(this->hp) + "\x1b[m";
+    std::string coloredHp = "\x1b[38;2;127;255;0m" + std::to_string(this->hp) + "\x1b[m";
 
     if(restHpRatio < redRatio) {
-        coloredHp = "\x1b[38;2;255;69;0m " + std::to_string(this->hp) + " \x1b[m";
+        coloredHp = "\x1b[38;2;255;69;0m" + std::to_string(this->hp) + "\x1b[m";
     } else if(restHpRatio < yellowRatio) {
-        coloredHp = "\x1b[38;2;0;255;0m " + std::to_string(this->hp) + " \x1b[m";
+        coloredHp = "\x1b[38;2;255;255;205m"  + std::to_string(this->hp) + "\x1b[m";
     }
 
     return coloredHp;

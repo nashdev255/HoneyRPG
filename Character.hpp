@@ -15,14 +15,12 @@ class Character {
 
         int level;
         int maxLevel = 100;
-        int exp, reqExp;
 
         std::vector<AttackMethod> attackMethod;
         AttackMethod selectedAttackMethod;
     
     private:
         double calcDamageMagnification(Character attacker);
-        int calcReqExpAmount();
         std::string coloredHp();
 
     public:
@@ -36,13 +34,6 @@ class Character {
         virtual void damagedMessage(int const damagePoint) {};
         void dead();
         virtual void deadMessage() {};
-
-        // level-related
-        void earnExpFromEnemy(int dropExpAmount);
-        virtual void updateReqExp();
-        void updateExp();
-        void updateLevel();
-        void levelUp();
 
         // getter, setter
         std::string getName();
@@ -62,10 +53,6 @@ class Character {
 
         int getLevel();
         void setLevel(int level);
-        int getExp();
-        void setExp(int exp);
-        int getReqExp();
-        void setReqExp(int reqExp);
 
         std::vector<AttackMethod> getAttackMethod();
         void setAttackMethod(std::vector<AttackMethod> attackMethod);
@@ -92,8 +79,6 @@ inline Character :: Character(std::string const name, ElementalAttribute const e
     this->spd = spd;
 
     this->level = 1;
-    this->exp = 0;
-    this->updateReqExp();
 
     attackMethod.resize(4);
 }
@@ -152,22 +137,6 @@ inline int Character :: getLevel() {
 
 inline void Character :: setLevel(int const level) {
     this->level = level;
-}
-
-inline int Character :: getExp() {
-    return this->exp;
-}
-
-inline void Character :: setExp(int const exp) {
-    this->exp = exp;
-}
-
-inline int Character :: getReqExp() {
-    return this->reqExp;
-}
-
-inline void Character :: setReqExp(int const reqExp) {
-    this->reqExp = reqExp;
 }
 
 inline AttackMethod Character :: getSelectedAttackMethod() {

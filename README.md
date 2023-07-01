@@ -17,7 +17,6 @@ void func(Type& arg);
 - BattleField
 - Attackmethod
 - ElementalAttribute
-- GameField
 
 ## namespaces
 - GeneralMethod

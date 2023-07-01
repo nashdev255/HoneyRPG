@@ -40,3 +40,38 @@ void Fighter :: damagedMessage(int const damagePoint) {
 void Fighter :: deadMessage() {
     std::cout << this->name << " has ran out of energy..." << std::endl;
 }
+
+void Fighter :: updateReqExp() {
+    this->reqExp = calcReqExpAmount();
+}
+
+void Fighter :: updateExp() {
+    this->exp = this->exp - this->reqExp;
+}
+
+void Fighter :: updateLevel() {
+    while(this->reqExp <= this->exp) {
+        if(this->level == this->maxLevel) {
+            break;
+        }
+
+        updateExp();
+        levelUp();
+        updateReqExp();
+
+        std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
+    }
+}
+
+void Fighter :: levelUp() {
+    this->level++;
+}
+
+void Fighter :: earnExpFromEnemy(int dropExpAmount) {
+    this->exp = this->exp + dropExpAmount;
+}
+
+int Fighter :: calcReqExpAmount() {
+    const int totalReqExpAmount = this->level*100;
+    return totalReqExpAmount;
+}

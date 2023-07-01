@@ -79,5 +79,11 @@ int Fighter :: calcReqExpAmount() {
 
 void Fighter :: updateSkillPoint() {
     const int skillPointIncreaseAmount = 5;
-    this->skillPoint += skillPointIncreaseAmount;
+    const int totalSkillPoint = this->skillPoint + skillPointIncreaseAmount;
+    std::cout << "SKILL POINTS INCREASED : " << this->skillPoint << " > " << totalSkillPoint;
+    this->skillPoint = totalSkillPoint;
+}
+
+void Fighter :: assignSkillPoint() {
+    std::cout << "assign skill points" << std::endl;
 }

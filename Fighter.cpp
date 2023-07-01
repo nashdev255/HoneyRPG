@@ -65,6 +65,7 @@ void Fighter :: updateLevel() {
 
 void Fighter :: levelUp() {
     this->level++;
+    updateSkillPoint();
 }
 
 void Fighter :: earnExpFromEnemy(int dropExpAmount) {
@@ -74,4 +75,9 @@ void Fighter :: earnExpFromEnemy(int dropExpAmount) {
 int Fighter :: calcReqExpAmount() {
     const int totalReqExpAmount = this->level*100;
     return totalReqExpAmount;
+}
+
+void Fighter :: updateSkillPoint() {
+    const int skillPointIncreaseAmount = 5;
+    this->skillPoint += skillPointIncreaseAmount;
 }

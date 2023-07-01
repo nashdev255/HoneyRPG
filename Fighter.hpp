@@ -29,6 +29,7 @@ class Fighter : public Character {
         void updateExp();
         void updateLevel();
         void levelUp();
+        void updateSkillPoint();
 
         // getter, setter
         int getExp();

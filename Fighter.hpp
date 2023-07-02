@@ -18,6 +18,11 @@ class Fighter : public Character {
         void earnSkillPoint();
         int calcSkillPointIncreaseAmount();
 
+        int calcMaxhpIncreaseAmount();
+        int calcAtkIncreaseAmount();
+        int calcDefIncreaseAmount();
+        int calcSpdIncreaseAmount();
+
     public:
         Fighter() {};
         Fighter(std::string name, ElementalAttribute element, int maxhp, int atk, int def, int spd);

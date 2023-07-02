@@ -143,5 +143,23 @@ int Fighter :: calcSkillPointIncreaseAmount() {
 */
 void Fighter :: assignSkillPoint() {
     std::cout << "assign skill points" << std::endl;
-    
+}
+
+/**
+ * スキルポイントでステータスを増量する
+*/
+int Fighter :: calcMaxhpIncreaseAmount() {
+    const int maxhpIncreaseAmount = 100;
+}
+
+int Fighter :: calcAtkIncreaseAmount() {
+    const int atkIncreaseAmount = 10;
+}
+
+int Fighter :: calcDefIncreaseAmount() {
+    const int defIncreaseAmount = 10;
+}
+
+int Fighter :: calcSpdIncreaseAmount() {
+    const int spdIncreaseAmount = 5;
 }

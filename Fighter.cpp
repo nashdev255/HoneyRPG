@@ -1,18 +1,19 @@
 #include "Fighter.hpp"
 
 void Fighter :: initAttackMethod() {
-    int power = this->atk;
+    const int power = this->atk;
+    const ElementalAttributeList fighterElement = elementalAttribute.getElement();
     this->attackMethod[0].setParams("punchAttack", ElementalAttributeList::None, power);
     this->attackMethod[1].setParams("kickAttack", ElementalAttributeList::None, power*1.5);
-    this->attackMethod[2].setParams("elementalAttack", this->elementalAttribute.getElement(), power*0.8);
-    this->attackMethod[3].setParams("elementalStorm", this->elementalAttribute.getElement(), power*2);
+    this->attackMethod[2].setParams("elementalAttack", fighterElement, power*0.8);
+    this->attackMethod[3].setParams("elementalStorm", fighterElement, power*2);
 }
 
 void Fighter :: selectAttack(Monster& monster) {
-    std::cout << "Select How to " << this->name << " attack." << std::endl;
+    std::cout << "Select How to " << name << " attack." << std::endl;
     std::cout << "<methods>" << std::endl;
-    // display ways how fighter can attack
-    for(int i=0;i<this->attackMethod.size();i++) {
+    
+    for(int i=0;i<attackMethod.size();i++) {
         std::cout << i+1 << " : " << this->attackMethod[i].getName() << std::endl;
     }
     
@@ -86,4 +87,5 @@ void Fighter :: updateSkillPoint() {
 
 void Fighter :: assignSkillPoint() {
     std::cout << "assign skill points" << std::endl;
+    
 }

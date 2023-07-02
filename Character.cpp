@@ -37,7 +37,7 @@ void Character :: damagedBy(Character attacker) {
     hp = hp - totalDamageAmount;
     this->damagedMessage(totalDamageAmount);
 
-    if(0 < this->hp) return;
+    if(0 < hp) return;
     this->dead();
 }
 
@@ -47,8 +47,8 @@ double Character :: calcDamageMagnification(Character attacker) {
     const double saturateDamageMagnification  = 0.5;
 
     const ElementalAttributeList attackerAttackElement = attacker.getSelectedAttackMethod().getElement();
-    const ElementalReaction elementalReaction = this->elementalAttribute.ElementalReact(attackerAttackElement);
-    
+    const ElementalReaction elementalReaction = elementalAttribute.ElementalReact(attackerAttackElement);
+
     if(elementalReaction == NoneReact) return noneReactDamageMagnification; 
     if(elementalReaction == Saturate) return saturateDamageMagnification;
     return reactDamageMagnification;
@@ -59,20 +59,20 @@ std::string Character :: colorHp() {
     const double yellowRatio = 0.5;
     // default green
 
-    const double restHpRatio = double(this->hp) / double(this->maxhp);
+    const double restHpRatio = double(hp) / double(maxhp);
 
-    std::string coloredHp = "\x1b[38;2;127;255;0m" + std::to_string(this->hp) + "\x1b[m";
+    std::string coloredHp = "\x1b[38;2;127;255;0m" + std::to_string(hp) + "\x1b[m";
 
-    if(restHpRatio < redRatio) {
-        coloredHp = "\x1b[38;2;255;69;0m" + std::to_string(this->hp) + "\x1b[m";
-    } else if(restHpRatio < yellowRatio) {
-        coloredHp = "\x1b[38;2;255;255;205m"  + std::to_string(this->hp) + "\x1b[m";
+    if(restHpRatio <= redRatio) {
+        coloredHp = "\x1b[38;2;255;69;0m" + std::to_string(hp) + "\x1b[m";
+    } else if(restHpRatio <= yellowRatio) {
+        coloredHp = "\x1b[38;2;255;255;205m"  + std::to_string(hp) + "\x1b[m";
     }
 
     return coloredHp;
 }
 
 void Character :: dead() {
-    this->hp = 0;
-    this->deadMessage();
+    hp = 0;
+    deadMessage();
 }

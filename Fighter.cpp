@@ -14,8 +14,8 @@ void Fighter :: buildAttackMethod() {
     this->attackMethod[3].setParams("elementalStorm", fighterElement, power*2);
 }
 
-void Fighter :: selectAttackMethod(Monster& monster) {
-    std::cout << "Select How to " << name << " attack." << std::endl;
+void Fighter :: attack(Monster& monster) {
+    std::cout << "Select how to " << name << " attack." << std::endl;
     displayAttackMethods();
     
     int method = this->attackMethod.size()+1;

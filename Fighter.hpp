@@ -21,7 +21,7 @@ class Fighter : public Character {
         virtual void damagedMessage(int const damagePoint);
         virtual void deadMessage();
 
-        void selectAttackMethod(Monster& monster);
+        void attack(Monster& monster);
         void displayAttackMethods();
 
         // level-related
@@ -42,4 +42,3 @@ class Fighter : public Character {
         void setSkillPoint(int skillPoint);
 
 };
-

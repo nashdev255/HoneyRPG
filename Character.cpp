@@ -33,11 +33,11 @@ double Character :: calcDamageMagnification(Character attacker) {
 }
 
 std::string Character :: coloredHp() {
-    double redRatio = 0.2;
-    double yellowRatio = 0.5;
+    const double redRatio = 0.2;
+    const double yellowRatio = 0.5;
     // default green
 
-    double restHpRatio = double(this->hp) / double(this->maxhp);
+    const double restHpRatio = double(this->hp) / double(this->maxhp);
 
     std::string coloredHp = "\x1b[38;2;127;255;0m" + std::to_string(this->hp) + "\x1b[m";
 

@@ -34,7 +34,7 @@ void Character :: damagedBy(Character attacker) {
     const double damageMagnification = calcDamageMagnification(attacker);
     const int totalDamageAmount = baseDamageAmount * damageMagnification;
 
-    this->hp -= totalDamageAmount;
+    hp = hp - totalDamageAmount;
     this->damagedMessage(totalDamageAmount);
 
     if(0 < this->hp) return;
@@ -42,10 +42,16 @@ void Character :: damagedBy(Character attacker) {
 }
 
 double Character :: calcDamageMagnification(Character attacker) {
-    const ElementalReaction elementalReaction = this->elementalAttribute.ElementalReact(attacker.getSelectedAttackMethod().getElement());
-    if(elementalReaction == NoneReact) { std::cout << "debug" << std::endl; return 1.0; } 
-    if(elementalReaction == Saturate) return 0.5;
-    return 1.8;
+    const double reactDamageMagnification     = 1.8;
+    const double noneReactDamageMagnification = 1.0;
+    const double saturateDamageMagnification  = 0.5;
+
+    const ElementalAttributeList attackerAttackElement = attacker.getSelectedAttackMethod().getElement();
+    const ElementalReaction elementalReaction = this->elementalAttribute.ElementalReact(attackerAttackElement);
+    
+    if(elementalReaction == NoneReact) return noneReactDamageMagnification; 
+    if(elementalReaction == Saturate) return saturateDamageMagnification;
+    return reactDamageMagnification;
 }
 
 std::string Character :: colorHp() {

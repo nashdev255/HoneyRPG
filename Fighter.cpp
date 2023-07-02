@@ -1,6 +1,6 @@
 #include "Fighter.hpp"
 
-Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0), skillPoint(0) {
+Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0), reqExp(0), skillPoint(0) {
     updateReqExp();
     buildAttackMethod();
 }
@@ -100,7 +100,7 @@ int Fighter :: calcReqExpIncreaseAmount() {
  * 
  * @param dropExpAmount 敵の経験値量
 */
-void Fighter :: earnExpFromEnemy(int dropExpAmount) {
+void Fighter :: earnExpFromEnemy(int const dropExpAmount) {
     exp = exp + dropExpAmount;
 }
 
@@ -116,7 +116,7 @@ void Fighter :: updateExp() {
 */
 void Fighter :: levelUp() {
     level++;
-    std::cout << "LEVELUP!!! : " << level-1 << " > " << level << std::endl;
+    std::cout << "LEVELUP : " << level-1 << " > " << level << std::endl;
     earnSkillPoint();
 }
 

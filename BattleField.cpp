@@ -2,74 +2,74 @@
 
 void BattleField :: showBattleFieldStatus() {
     std::cout << "<BattleFieldStatus>" << std::endl;
-    std::cout << "FGIHTER : " << this->fighter->getName() << std::endl;
-    std::cout << "MONSTER : " << this->monster->getName() << std::endl;
+    std::cout << "FGIHTER : " << fighter->getName() << std::endl;
+    std::cout << "MONSTER : " << monster->getName() << std::endl;
     std::cout << std::endl;
 }
 
 void BattleField :: initBattleField() {
-    this->initTurn();
-    this->cycleTurn();
+    initTurn();
+    cycleTurn();
 }
 
 void BattleField :: cycleTurn() {
-    this->fighter->showStatus();
-    this->monster->showStatus();
-    this->startTurn();
-    this->switchTurn();
+    fighter->showStatus();
+    monster->showStatus();
+    startTurn();
+    switchTurn();
 
-    if(this->canEndBattle()) {
-        this->endBattle();
+    if(canEndBattle()) {
+        endBattle();
         return;
     }
     
-    this->cycleTurn();
+    cycleTurn();
 }
 
 void BattleField :: initTurn() {
-    int fighterSpd = this->fighter->getSpd();
-    int monsterSpd = this->monster->getSpd();
+    int fighterSpd = fighter->getSpd();
+    int monsterSpd = monster->getSpd();
 
     if(fighterSpd == monsterSpd) {
-        // set turn randomly if both spds are the same
-        this->isFighterTurn = GeneralMethod::generateRandomSeed(0, 1);
+        // 両者が同じ速さだった場合にランダムにターンを決定する
+        isFighterTurn = GeneralMethod::generateRandomSeed(0, 1);
 
     } else if(monsterSpd < fighterSpd) {
-        this->isFighterTurn = true;
+        isFighterTurn = true;
     } else if(fighterSpd < monsterSpd) {
-        this->isFighterTurn = false;
+        isFighterTurn = false;
     }
 
 }
 
 void BattleField :: startTurn() {
-    if(this->isFighterTurn) {
-        this->fighter->attack(*(this->monster));
+    if(isFighterTurn) {
+        fighter->attack(*monster);
     } else {
-        this->monster->randomAttack(*(this->fighter));
+        monster->randomAttack(*fighter);
     }
 }
 
 void BattleField :: switchTurn() {
-    this->isFighterTurn = !(this->isFighterTurn);
+    isFighterTurn = !(isFighterTurn);
 }
 
 void BattleField :: endBattle() {
-    if(this->isVictory()) {
-        this->win();
+    if(isVictory()) {
+        win();
     } else {
-        this->lose();
+        lose();
     }
 }
 
 bool BattleField :: canEndBattle() {
-    if(this->fighter->isAlive() == false || this->monster->isAlive() == false) return true;
+    if(fighter->isAlive() == false || monster->isAlive() == false) return true;
     std::cout << "debug" << std::endl;
     return false;
 }
 
 bool BattleField :: isVictory() {
-    if(this->fighter->isAlive() && this->monster->isAlive() == false) {
+    if(fighter->isAlive() && monster->isAlive() == false) {
         return true;
     }
     return false;
@@ -78,8 +78,8 @@ bool BattleField :: isVictory() {
 void BattleField :: win() {
     std::cout << "you win!!!" << std::endl;
     // provide exp for fighter
-    this->fighter->earnExpFromEnemy(this->monster->getDropExpAmount());
-    this->fighter->updateLevel();
+    fighter->earnExpFromEnemy(monster->getDropExpAmount());
+    fighter->updateLevel();
 }
 
 void BattleField :: lose() {

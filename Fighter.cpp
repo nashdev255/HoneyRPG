@@ -68,27 +68,12 @@ void Fighter :: deadMessage() {
     std::cout << name << " has ran out of energy..." << std::endl;
 }
 
-
-void Fighter :: updateReqExp() {
-    reqExp = reqExp + calcReqExpIncreaseAmount();
-}
-
-/**
- * レベルアップ時に持っている経験値を消費する
-*/
-void Fighter :: updateExp() {
-    exp = exp - reqExp;
-}
-
 /**
  * レベルが上がるかどうか監視する
 */
 void Fighter :: updateLevel() {
     while(reqExp <= exp) {
-        if(level == maxLevel) {
-            break;
-        }
-
+        if(level == maxLevel) break;
         updateExp();
         levelUp();
         updateReqExp();
@@ -96,12 +81,18 @@ void Fighter :: updateLevel() {
 }
 
 /**
- * レベルを加算し、スキルポイントを更新する
+ * 必要な経験値量を更新する
 */
-void Fighter :: levelUp() {
-    level++;
-    std::cout << "LEVELUP!!! : " << level-1 << " > " << level << std::endl;
-    earnSkillPoint();
+void Fighter :: updateReqExp() {
+    reqExp = reqExp + calcReqExpIncreaseAmount();
+}
+
+/**
+ * レベルに応じて必要な経験値量を計算する
+*/
+int Fighter :: calcReqExpIncreaseAmount() {
+    const int totalReqExpAmount = level*100;
+    return totalReqExpAmount;
 }
 
 /**
@@ -114,11 +105,19 @@ void Fighter :: earnExpFromEnemy(int dropExpAmount) {
 }
 
 /**
- * レベルに応じて必要な経験値量を計算する
+ * レベルアップ時に持っている経験値を消費する
 */
-int Fighter :: calcReqExpIncreaseAmount() {
-    const int totalReqExpAmount = level*100;
-    return totalReqExpAmount;
+void Fighter :: updateExp() {
+    exp = exp - reqExp;
+}
+
+/**
+ * レベルを加算し、スキルポイントを更新する
+*/
+void Fighter :: levelUp() {
+    level++;
+    std::cout << "LEVELUP!!! : " << level-1 << " > " << level << std::endl;
+    earnSkillPoint();
 }
 
 /**

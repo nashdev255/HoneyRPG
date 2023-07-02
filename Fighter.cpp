@@ -128,6 +128,7 @@ void Fighter :: earnSkillPoint() {
     const int totalSkillPoint = skillPoint + skillPointIncreaseAmount;
     std::cout << "SKILL POINTS INCREASED : " << skillPoint << " > " << totalSkillPoint << std::endl;
     skillPoint = totalSkillPoint;
+    assignSkillPoint();
 }
 
 /**
@@ -144,18 +145,48 @@ int Fighter :: calcSkillPointIncreaseAmount() {
 void Fighter :: assignSkillPoint() {
     std::cout << "you have " << skillPoint << " skill points!!!" << std::endl;
     std::cout << "assign skill points to status." << std::endl;
-    std::cout << "enter status name yout want to enhance(hp/atk/def/spd) >>";
     std::string statusName;
     while(0 < skillPoint) {
+        std::cout << "enter status name you want to enhance(maxhp/atk/def/spd) >>";
         std::cin >> statusName;
         while(true) {
-            if(statusName == "maxhp") { hp = hp + calcMaxhpIncreaseAmount(); break; }
-            if(statusName == "atk") { atk = atk + calcAtkIncreaseAmount(); break; }
-            if(statusName == "def") { def = def + calcDefIncreaseAmount(); break; }
-            if(statusName == "spd") { spd = spd + calcSpdIncreaseAmount(); break; }
-            showStatus();
+            if(statusName == "maxhp") { 
+                const int preMaxhp = maxhp;
+                const int totalMaxhp = maxhp + calcMaxhpIncreaseAmount();
+                maxhp = totalMaxhp;
+                skillPoint--;
+                std::cout << "POWERUP : " << preMaxhp << " > " << totalMaxhp << std::endl;
+                break;
+            }
+            if(statusName == "atk") {
+                const int preAtk = atk;
+                const int totalAtk = atk + calcAtkIncreaseAmount();
+                atk = totalAtk;
+                skillPoint--;
+                std::cout << "POWERUP : " << preAtk << " > " << totalAtk << std::endl;
+                break;
+            }
+            if(statusName == "def") {
+                const int preDef = def;
+                const int totalDef = def + calcDefIncreaseAmount();
+                def = totalDef;
+                skillPoint--;
+                std::cout << "POWERUP : " << preDef << " > " << totalDef << std::endl;
+                break;
+            }
+            if(statusName == "spd") {
+                const int preSpd = spd;
+                const int totalSpd = spd + calcSpdIncreaseAmount();
+                spd = totalSpd;
+                skillPoint--;
+                std::cout << "POWERUP : " << preSpd << " > " << totalSpd << std::endl;
+                break;
+            }
+            std::cout << "TYPE ERROR!!!" << std::endl;
+            break;
         }
     }
+    showStatus();
 }
 
 /**

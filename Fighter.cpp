@@ -74,9 +74,7 @@ void Fighter :: deadMessage() {
 void Fighter :: updateLevel() {
     while(reqExp <= exp) {
         if(level == maxLevel) break;
-        updateExp();
         levelUp();
-        updateReqExp();
     }
 }
 
@@ -84,7 +82,7 @@ void Fighter :: updateLevel() {
  * 必要な経験値量を更新する
 */
 void Fighter :: updateReqExp() {
-    reqExp = reqExp + calcReqExpIncreaseAmount();
+    reqExp = calcReqExpIncreaseAmount();
 }
 
 /**
@@ -115,8 +113,10 @@ void Fighter :: updateExp() {
  * レベルを加算し、スキルポイントを更新する
 */
 void Fighter :: levelUp() {
+    updateExp();
     level++;
     std::cout << "LEVELUP : " << level-1 << " > " << level << std::endl;
+    updateReqExp();
     earnSkillPoint();
 }
 

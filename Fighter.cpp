@@ -142,7 +142,20 @@ int Fighter :: calcSkillPointIncreaseAmount() {
  * プレーヤーにスキルポイントを割り当てさせる
 */
 void Fighter :: assignSkillPoint() {
-    std::cout << "assign skill points" << std::endl;
+    std::cout << "you have " << skillPoint << " skill points!!!" << std::endl;
+    std::cout << "assign skill points to status." << std::endl;
+    std::cout << "enter status name yout want to enhance(hp/atk/def/spd) >>";
+    std::string statusName;
+    while(0 < skillPoint) {
+        std::cin >> statusName;
+        while(true) {
+            if(statusName == "maxhp") { hp = hp + calcMaxhpIncreaseAmount(); break; }
+            if(statusName == "atk") { atk = atk + calcAtkIncreaseAmount(); break; }
+            if(statusName == "def") { def = def + calcDefIncreaseAmount(); break; }
+            if(statusName == "spd") { spd = spd + calcSpdIncreaseAmount(); break; }
+            showStatus();
+        }
+    }
 }
 
 /**
@@ -150,16 +163,20 @@ void Fighter :: assignSkillPoint() {
 */
 int Fighter :: calcMaxhpIncreaseAmount() {
     const int maxhpIncreaseAmount = 100;
+    return maxhpIncreaseAmount;
 }
 
 int Fighter :: calcAtkIncreaseAmount() {
     const int atkIncreaseAmount = 10;
+    return atkIncreaseAmount;
 }
 
 int Fighter :: calcDefIncreaseAmount() {
     const int defIncreaseAmount = 10;
+    return defIncreaseAmount;
 }
 
 int Fighter :: calcSpdIncreaseAmount() {
     const int spdIncreaseAmount = 5;
+    return spdIncreaseAmount;
 }

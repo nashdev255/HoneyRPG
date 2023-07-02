@@ -1,5 +1,19 @@
 #pragma once
 #include "./Character.hpp"
+#include "./InvalidValueException.hpp"
+
+Character :: Character(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : name(name), elementalAttribute(elementalAttribute), maxhp(maxhp), atk(atk), def(def), spd(spd) {
+    // Exceptions handling
+    if(maxhp < 0) throw InvalidValueException();
+    if(atk < 0) throw InvalidValueException();
+    if(def < 0) throw InvalidValueException();
+    if(spd < 0) throw InvalidValueException();
+
+    this->hp = this->maxhp;
+    this->level = 1;
+
+    attackMethod.resize(4);
+}
 
 void Character :: showStatus() {
     std::cout << "<Status>" << std::endl;
@@ -13,7 +27,7 @@ void Character :: showStatus() {
     std::cout << std::endl;
 }
 
-void Character :: damaged(Character attacker) {
+void Character :: damagedBy(Character attacker) {
     const int baseDamageAmount = attacker.getSelectedAttackMethod().getPower();
     const double damageMagnification = calcDamageMagnification(attacker);
     const int totalDamageAmount = baseDamageAmount * damageMagnification;

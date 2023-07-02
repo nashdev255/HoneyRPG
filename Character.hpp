@@ -4,7 +4,6 @@
 #include <vector>
 #include "./ElementalAttribute.hpp"
 #include "./AttackMethod.hpp"
-#include "./InvalidValueException.hpp"
 
 class Character {
     protected:
@@ -30,7 +29,7 @@ class Character {
 
         void showStatus();
 
-        virtual void damaged(Character attacker);
+        virtual void damagedBy(Character attacker);
         virtual void damagedMessage(int const damagePoint) {};
         void dead();
         virtual void deadMessage() {};
@@ -60,28 +59,6 @@ class Character {
         void setSelectedAttackMethod(AttackMethod selectedAttackMethod);
 
 };
-
-inline Character :: Character(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) {
-    // Exceptions handling
-    if(maxhp < 0) throw InvalidValueException();
-    if(atk < 0) throw InvalidValueException();
-    if(def < 0) throw InvalidValueException();
-    if(spd < 0) throw InvalidValueException();
-
-    // initialize field
-    this->name = name;
-    this->elementalAttribute = elementalAttribute;
-
-    this->maxhp = maxhp;
-    this->hp = this->maxhp;
-    this->atk = atk;
-    this->def = def;
-    this->spd = spd;
-
-    this->level = 1;
-
-    attackMethod.resize(4);
-}
 
 inline std::string Character :: getName() {
     return this->name;

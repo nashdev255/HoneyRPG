@@ -7,5 +7,5 @@ void AttackMethod :: setParams(std::string const name, ElementalAttributeList co
 }
 
 void AttackMethod :: action(Character& attacker, Character& target) {
-    target.damaged(attacker);
+    target.damagedBy(attacker);
 }

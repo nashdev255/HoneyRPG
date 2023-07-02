@@ -20,7 +20,7 @@ class Character {
     
     private:
         double calcDamageMagnification(Character attacker);
-        std::string coloredHp();
+        std::string colorHp();
 
     public:
         Character() {};

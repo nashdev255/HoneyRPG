@@ -16,14 +16,16 @@ Character :: Character(std::string const name, ElementalAttribute const elementa
 }
 
 void Character :: showStatus() {
+    std::string elementName = elementalAttribute.getElementAsString(this->elementalAttribute.getElement());
+    std::string coloredHp = colorHp();
     std::cout << "<Status>" << std::endl;
-    std::cout << "NAME : " << this->name << std::endl;
-    std::cout << "LEVEL : " << this->level << std::endl;
-    std::cout << "ELEMENT : " << this->elementalAttribute.getElementAsString(this->elementalAttribute.getElement()) << std::endl;
-    std::cout << "HP : " << this->coloredHp() << '/' << this->maxhp << std::endl;
-    std::cout << "ATK : " << this->atk << std::endl;
-    std::cout << "DEF : " << this->def << std::endl;
-    std::cout << "SPD : " << this->spd << std::endl;
+    std::cout << "NAME : " << name << std::endl;
+    std::cout << "LEVEL : " << level << std::endl;
+    std::cout << "ELEMENT : " << elementName << std::endl;
+    std::cout << "HP : " << coloredHp << '/' << maxhp << std::endl;
+    std::cout << "ATK : " << atk << std::endl;
+    std::cout << "DEF : " << def << std::endl;
+    std::cout << "SPD : " << spd << std::endl;
     std::cout << std::endl;
 }
 
@@ -46,7 +48,7 @@ double Character :: calcDamageMagnification(Character attacker) {
     return 1.8;
 }
 
-std::string Character :: coloredHp() {
+std::string Character :: colorHp() {
     const double redRatio = 0.2;
     const double yellowRatio = 0.5;
     // default green

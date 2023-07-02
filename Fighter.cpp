@@ -18,7 +18,7 @@ void Fighter :: buildAttackMethod() {
 }
 
 /**
- * 選択して攻撃する
+ * プレイヤーに選択させて攻撃する
  * 
  * @param monster 攻撃対象
 */
@@ -70,13 +70,19 @@ void Fighter :: deadMessage() {
 
 
 void Fighter :: updateReqExp() {
-    reqExp = calcReqExpAmount();
+    reqExp = reqExp + calcReqExpIncreaseAmount();
 }
 
+/**
+ * レベルアップ時に持っている経験値を消費する
+*/
 void Fighter :: updateExp() {
     exp = exp - reqExp;
 }
 
+/**
+ * レベルが上がるかどうか監視する
+*/
 void Fighter :: updateLevel() {
     while(reqExp <= exp) {
         if(level == maxLevel) {
@@ -89,10 +95,13 @@ void Fighter :: updateLevel() {
     }
 }
 
+/**
+ * レベルを加算し、スキルポイントを更新する
+*/
 void Fighter :: levelUp() {
     level++;
     std::cout << "LEVELUP!!! : " << level-1 << " > " << level << std::endl;
-    updateSkillPoint();
+    earnSkillPoint();
 }
 
 /**
@@ -107,18 +116,32 @@ void Fighter :: earnExpFromEnemy(int dropExpAmount) {
 /**
  * レベルに応じて必要な経験値量を計算する
 */
-int Fighter :: calcReqExpAmount() {
+int Fighter :: calcReqExpIncreaseAmount() {
     const int totalReqExpAmount = level*100;
     return totalReqExpAmount;
 }
 
-void Fighter :: updateSkillPoint() {
-    const int skillPointIncreaseAmount = 5;
+/**
+ * スキルポイントを獲得する
+*/
+void Fighter :: earnSkillPoint() {
+    const int skillPointIncreaseAmount = calcSkillPointIncreaseAmount();
     const int totalSkillPoint = skillPoint + skillPointIncreaseAmount;
     std::cout << "SKILL POINTS INCREASED : " << skillPoint << " > " << totalSkillPoint << std::endl;
     skillPoint = totalSkillPoint;
 }
 
+/**
+ * レベルに応じてスキルポイントを計算する
+*/
+int Fighter :: calcSkillPointIncreaseAmount() {
+    int skillPointIncreaseAmount = 5; // 今は5に固定
+    return skillPointIncreaseAmount;
+}
+
+/**
+ * プレーヤーにスキルポイントを割り当てさせる
+*/
 void Fighter :: assignSkillPoint() {
     std::cout << "assign skill points" << std::endl;
     

@@ -11,7 +11,12 @@ class Fighter : public Character {
 
     private:
         void buildAttackMethod();
-        int calcReqExpAmount();
+
+        void updateReqExp();
+        int calcReqExpIncreaseAmount();
+
+        void earnSkillPoint();
+        int calcSkillPointIncreaseAmount();
 
     public:
         Fighter() {};
@@ -24,16 +29,13 @@ class Fighter : public Character {
         void attack(Monster& monster);
         void displayAttackMethods();
 
-        // level-related
         void earnExpFromEnemy(int dropExpAmount);
-        void updateReqExp();
         void updateExp();
         void updateLevel();
         void levelUp();
-        void updateSkillPoint();
         void assignSkillPoint();
 
-        // getter, setter
+        // getter
         int getExp() { return exp; }
         int getReqExp() { return reqExp; }
         int getSkillPoint() { return skillPoint; }

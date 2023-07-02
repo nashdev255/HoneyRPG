@@ -1,6 +1,6 @@
 #include "Fighter.hpp"
 
-void Fighter :: initAttackMethod() {
+void Fighter :: buildAttackMethod() {
     const int power = this->atk;
     const ElementalAttributeList fighterElement = elementalAttribute.getElement();
     this->attackMethod[0].setParams("punchAttack", ElementalAttributeList::None, power);

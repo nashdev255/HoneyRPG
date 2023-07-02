@@ -20,7 +20,7 @@ class Fighter : public Character {
         virtual void damagedMessage(int const damagePoint);
         virtual void deadMessage();
 
-        void initAttackMethod();
+        void buildAttackMethod();
         void selectAttack(Monster& monster);
 
         // level-related
@@ -45,7 +45,7 @@ class Fighter : public Character {
 inline Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd) {
     this->exp = 0;
     this->updateReqExp();
-    this->initAttackMethod();
+    this->buildAttackMethod();
 }
 
 inline int Fighter :: getSkillPoint() {

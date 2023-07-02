@@ -34,11 +34,8 @@ class Fighter : public Character {
         void assignSkillPoint();
 
         // getter, setter
-        int getExp();
-        void setExp(int exp);
-        int getReqExp();
-        void setReqExp(int reqExp);
-        int getSkillPoint();
-        void setSkillPoint(int skillPoint);
+        int getExp() { return exp; }
+        int getReqExp() { return reqExp; }
+        int getSkillPoint() { return skillPoint; }
 
 };

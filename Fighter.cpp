@@ -1,67 +1,85 @@
 #include "Fighter.hpp"
 
 Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0), skillPoint(0) {
-    this->updateReqExp();
-    this->buildAttackMethod();
+    updateReqExp();
+    buildAttackMethod();
 }
 
+/**
+ * 選択可能な攻撃の情報を設定する
+*/
 void Fighter :: buildAttackMethod() {
-    const int power = this->atk;
+    const int power = atk;
     const ElementalAttributeList fighterElement = elementalAttribute.getElement();
-    this->attackMethod[0].setParams("punchAttack", ElementalAttributeList::None, power);
-    this->attackMethod[1].setParams("kickAttack", ElementalAttributeList::None, power*1.5);
-    this->attackMethod[2].setParams("elementalAttack", fighterElement, power*0.8);
-    this->attackMethod[3].setParams("elementalStorm", fighterElement, power*2);
+    attackMethod[0].setParams("punchAttack", ElementalAttributeList::None, power);
+    attackMethod[1].setParams("kickAttack", ElementalAttributeList::None, power*1.5);
+    attackMethod[2].setParams("elementalAttack", fighterElement, power*0.8);
+    attackMethod[3].setParams("elementalStorm", fighterElement, power*2);
 }
 
+/**
+ * 選択して攻撃する
+ * 
+ * @param monster 攻撃対象
+*/
 void Fighter :: attack(Monster& monster) {
     std::cout << "Select how to " << name << " attack." << std::endl;
     displayAttackMethods();
     
-    int method = this->attackMethod.size()+1;
+    int method = attackMethod.size()+1;
 
     std::cout << "> ";
-    while(this->attackMethod.size() < method) {
+    while(attackMethod.size() < method) {
         std::cin >> method;
-        if(this->attackMethod.size() < method) {
-            std::cout << "Select How to " << this->name << " attack." << std::endl;
+        if(attackMethod.size() < method) {
+            std::cout << "Select How to " << name << " attack." << std::endl;
             std::cout << "> ";
         }
     }
     method--;
 
-    this->selectedAttackMethod = this->attackMethod[method];
+    selectedAttackMethod = attackMethod[method];
 
-    std::cout << this->name << "'s " << this->selectedAttackMethod.getName() << "!!!" << std::endl;
+    std::cout << name << "'s " << selectedAttackMethod.getName() << "!!!" << std::endl;
     selectedAttackMethod.action(*this, monster);
 }
 
+/**
+ * 選択可能な攻撃を表示する
+*/
 void Fighter :: displayAttackMethods() {
     std::cout << "<methods>" << std::endl;
     for(int i=0;i<attackMethod.size();i++) {
-        std::cout << i+1 << " : " << this->attackMethod[i].getName() << std::endl;
+        std::cout << i+1 << " : " << attackMethod[i].getName() << std::endl;
     }
 }
 
+/**
+ * ダメージを食らった時のメッセージを表示する
+*/
 void Fighter :: damagedMessage(int const damagePoint) {
-    std::cout << this->name << " took " << damagePoint << " points of damage." << std::endl;
+    std::cout << name << " took " << damagePoint << " points of damage." << std::endl;
 }
 
+/**
+ * 死んだときのメッセージを表示する
+*/
 void Fighter :: deadMessage() {
-    std::cout << this->name << " has ran out of energy..." << std::endl;
+    std::cout << name << " has ran out of energy..." << std::endl;
 }
+
 
 void Fighter :: updateReqExp() {
-    this->reqExp = calcReqExpAmount();
+    reqExp = calcReqExpAmount();
 }
 
 void Fighter :: updateExp() {
-    this->exp = this->exp - this->reqExp;
+    exp = exp - reqExp;
 }
 
 void Fighter :: updateLevel() {
-    while(this->reqExp <= this->exp) {
-        if(this->level == this->maxLevel) {
+    while(reqExp <= exp) {
+        if(level == maxLevel) {
             break;
         }
 
@@ -72,25 +90,33 @@ void Fighter :: updateLevel() {
 }
 
 void Fighter :: levelUp() {
-    this->level++;
-    std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
+    level++;
+    std::cout << "LEVELUP!!! : " << level-1 << " > " << level << std::endl;
     updateSkillPoint();
 }
 
+/**
+ * 敵から経験値を獲得する
+ * 
+ * @param dropExpAmount 敵の経験値量
+*/
 void Fighter :: earnExpFromEnemy(int dropExpAmount) {
-    this->exp = this->exp + dropExpAmount;
+    exp = exp + dropExpAmount;
 }
 
+/**
+ * レベルに応じて必要な経験値量を計算する
+*/
 int Fighter :: calcReqExpAmount() {
-    const int totalReqExpAmount = this->level*100;
+    const int totalReqExpAmount = level*100;
     return totalReqExpAmount;
 }
 
 void Fighter :: updateSkillPoint() {
     const int skillPointIncreaseAmount = 5;
-    const int totalSkillPoint = this->skillPoint + skillPointIncreaseAmount;
-    std::cout << "SKILL POINTS INCREASED : " << this->skillPoint << " > " << totalSkillPoint << std::endl;
-    this->skillPoint = totalSkillPoint;
+    const int totalSkillPoint = skillPoint + skillPointIncreaseAmount;
+    std::cout << "SKILL POINTS INCREASED : " << skillPoint << " > " << totalSkillPoint << std::endl;
+    skillPoint = totalSkillPoint;
 }
 
 void Fighter :: assignSkillPoint() {

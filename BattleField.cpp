@@ -44,7 +44,7 @@ void BattleField :: initTurn() {
 
 void BattleField :: startTurn() {
     if(this->isFighterTurn) {
-        this->fighter->selectAttack(*(this->monster));
+        this->fighter->selectAttackMethod(*(this->monster));
     } else {
         this->monster->randomAttack(*(this->fighter));
     }

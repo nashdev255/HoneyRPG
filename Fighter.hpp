@@ -10,6 +10,7 @@ class Fighter : public Character {
         int skillPoint;
 
     private:
+        void buildAttackMethod();
         int calcReqExpAmount();
 
     public:
@@ -20,8 +21,8 @@ class Fighter : public Character {
         virtual void damagedMessage(int const damagePoint);
         virtual void deadMessage();
 
-        void buildAttackMethod();
-        void selectAttack(Monster& monster);
+        void selectAttackMethod(Monster& monster);
+        void displayAttackMethods();
 
         // level-related
         void earnExpFromEnemy(int dropExpAmount);
@@ -42,16 +43,3 @@ class Fighter : public Character {
 
 };
 
-inline Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd) {
-    this->exp = 0;
-    this->updateReqExp();
-    this->buildAttackMethod();
-}
-
-inline int Fighter :: getSkillPoint() {
-    return this->skillPoint;
-}
-
-inline void Fighter :: setSkillPoint(int skillPoint) {
-    this->skillPoint = skillPoint;
-}

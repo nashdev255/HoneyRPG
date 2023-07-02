@@ -1,5 +1,10 @@
 #include "Fighter.hpp"
 
+Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0) {
+    this->updateReqExp();
+    this->buildAttackMethod();
+}
+
 void Fighter :: buildAttackMethod() {
     const int power = this->atk;
     const ElementalAttributeList fighterElement = elementalAttribute.getElement();
@@ -9,16 +14,13 @@ void Fighter :: buildAttackMethod() {
     this->attackMethod[3].setParams("elementalStorm", fighterElement, power*2);
 }
 
-void Fighter :: selectAttack(Monster& monster) {
+void Fighter :: selectAttackMethod(Monster& monster) {
     std::cout << "Select How to " << name << " attack." << std::endl;
-    std::cout << "<methods>" << std::endl;
+    displayAttackMethods();
     
-    for(int i=0;i<attackMethod.size();i++) {
-        std::cout << i+1 << " : " << this->attackMethod[i].getName() << std::endl;
-    }
-    
-    std::cout << "> ";
     int method = this->attackMethod.size()+1;
+
+    std::cout << "> ";
     while(this->attackMethod.size() < method) {
         std::cin >> method;
         if(this->attackMethod.size() < method) {
@@ -32,6 +34,13 @@ void Fighter :: selectAttack(Monster& monster) {
 
     std::cout << this->name << "'s " << this->selectedAttackMethod.getName() << "!!!" << std::endl;
     selectedAttackMethod.action(*this, monster);
+}
+
+void Fighter :: displayAttackMethods() {
+    std::cout << "<methods>" << std::endl;
+    for(int i=0;i<attackMethod.size();i++) {
+        std::cout << i+1 << " : " << this->attackMethod[i].getName() << std::endl;
+    }
 }
 
 void Fighter :: damagedMessage(int const damagePoint) {

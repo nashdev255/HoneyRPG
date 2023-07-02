@@ -15,6 +15,9 @@ Character :: Character(std::string const name, ElementalAttribute const elementa
     attackMethod.resize(4);
 }
 
+/**
+ * ステータスを照会する
+*/
 void Character :: showStatus() {
     std::string elementName = elementalAttribute.getElementAsString(this->elementalAttribute.getElement());
     std::string coloredHp = colorHp();
@@ -29,6 +32,11 @@ void Character :: showStatus() {
     std::cout << std::endl;
 }
 
+/**
+ * ダメージを受ける
+ * 
+ * @param attacker 攻撃側
+*/
 void Character :: damagedBy(Character attacker) {
     const int baseDamageAmount = attacker.getSelectedAttackMethod().getPower();
     const double damageMagnification = calcDamageMagnification(attacker);
@@ -41,6 +49,11 @@ void Character :: damagedBy(Character attacker) {
     this->dead();
 }
 
+/**
+ * ダメージの倍率を計算する
+ * 
+ * @param attacker 攻撃側
+*/
 double Character :: calcDamageMagnification(Character attacker) {
     const double reactDamageMagnification     = 1.8;
     const double noneReactDamageMagnification = 1.0;
@@ -54,6 +67,11 @@ double Character :: calcDamageMagnification(Character attacker) {
     return reactDamageMagnification;
 }
 
+/**
+ * HPに色をつける
+ * 
+ * @param 色付けされた文字列HP
+*/
 std::string Character :: colorHp() {
     const double redRatio = 0.2;
     const double yellowRatio = 0.5;
@@ -72,6 +90,9 @@ std::string Character :: colorHp() {
     return coloredHp;
 }
 
+/**
+ * 死んだときの処理を行う
+*/
 void Character :: dead() {
     hp = 0;
     deadMessage();

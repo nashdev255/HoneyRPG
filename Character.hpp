@@ -19,7 +19,7 @@ class Character {
         AttackMethod selectedAttackMethod;
     
     private:
-        double calcDamageMagnification(Character attacker);
+        double calcDamageMagnification(Character& attacker);
         std::string colorHp();
 
     public:
@@ -29,101 +29,23 @@ class Character {
 
         void showStatus();
 
-        virtual void damagedBy(Character attacker);
+        virtual void damagedBy(Character& attacker);
         virtual void damagedMessage(int const damagePoint) {};
         void dead();
         virtual void deadMessage() {};
 
         // getter, setter
-        std::string getName();
-        void setName(std::string name);
-        ElementalAttribute getElementalAttribute();
-        void setElementalAttribute(ElementalAttribute element);
+        std::string getName() { return name; }
+        ElementalAttribute getElementalAttribute() { return elementalAttribute; }
+        int getHp() { return hp; }
+        int getAtk() { return atk; }
+        int getDef() { return def; }
+        int getSpd() { return spd; }
+        int getLevel() { return level; }
 
-        int getHp();
-        void setHp(int hp);
-        int getAtk();
-        void setAtk(int atk);
-        int getDef();
-        void setDef(int def);
-        int getSpd();
-        void setSpd(int spd);
-        bool isAlive();
-
-        int getLevel();
-        void setLevel(int level);
+        bool isAlive() { return hp != 0; }
 
         std::vector<AttackMethod> getAttackMethod();
-        void setAttackMethod(std::vector<AttackMethod> attackMethod);
         AttackMethod getSelectedAttackMethod();
-        void setSelectedAttackMethod(AttackMethod selectedAttackMethod);
 
 };
-
-inline std::string Character :: getName() {
-    return this->name;
-}
-
-inline void Character :: setName(std::string name) {
-    this->name = name;
-}
-
-inline ElementalAttribute Character :: getElementalAttribute() {
-    return this->elementalAttribute;
-}
-
-inline void Character :: setElementalAttribute(ElementalAttribute elementalAttribute) {
-    this->elementalAttribute = elementalAttribute;
-}
-
-inline int Character :: getHp() {
-    return this->hp;
-}
-
-inline void Character :: setHp(int const hp) {
-    this->hp = hp;
-}
-
-inline int Character :: getAtk() {
-    return this->atk;
-}
-
-inline void Character :: setAtk(int const atk) {
-    this->atk = atk;
-}
-
-inline int Character :: getDef() {
-    return this->def;
-}
-
-inline void Character :: setDef(int const def) {
-    this->def = def;
-}
-
-inline int Character :: getSpd() {
-    return this->spd;
-}
-
-inline void Character :: setSpd(int const spd) {
-    this->spd = spd;
-}
-
-inline int Character :: getLevel() {
-    return this->level;
-}
-
-inline void Character :: setLevel(int const level) {
-    this->level = level;
-}
-
-inline AttackMethod Character :: getSelectedAttackMethod() {
-    return this->selectedAttackMethod;
-}
-
-inline void Character :: setSelectedAttackMethod(AttackMethod selectedAttackMethod) {
-    this->selectedAttackMethod = selectedAttackMethod;
-}
-
-inline bool Character :: isAlive() {
-    return this->hp != 0;
-}

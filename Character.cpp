@@ -9,8 +9,8 @@ Character :: Character(std::string const name, ElementalAttribute const elementa
     if(def < 0) throw InvalidValueException();
     if(spd < 0) throw InvalidValueException();
 
-    this->hp = this->maxhp;
-    this->level = 1;
+    hp = maxhp;
+    level = 1;
 
     attackMethod.resize(4);
 }
@@ -37,8 +37,8 @@ void Character :: showStatus() {
  * 
  * @param attacker 攻撃側
 */
-void Character :: damagedBy(Character attacker) {
-    const int baseDamageAmount = attacker.getSelectedAttackMethod().getPower();
+void Character :: damagedBy(Character& attacker) {
+    const int baseDamageAmount = attacker.selectedAttackMethod.getPower();
     const double damageMagnification = calcDamageMagnification(attacker);
     const int totalDamageAmount = baseDamageAmount * damageMagnification;
 
@@ -54,12 +54,12 @@ void Character :: damagedBy(Character attacker) {
  * 
  * @param attacker 攻撃側
 */
-double Character :: calcDamageMagnification(Character attacker) {
+double Character :: calcDamageMagnification(Character& attacker) {
     const double reactDamageMagnification     = 1.8;
     const double noneReactDamageMagnification = 1.0;
     const double saturateDamageMagnification  = 0.5;
 
-    const ElementalAttributeList attackerAttackElement = attacker.getSelectedAttackMethod().getElement();
+    const ElementalAttributeList attackerAttackElement = attacker.selectedAttackMethod.getElement();
     const ElementalReaction elementalReaction = elementalAttribute.ElementalReact(attackerAttackElement);
 
     if(elementalReaction == NoneReact) return noneReactDamageMagnification; 

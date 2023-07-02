@@ -1,6 +1,6 @@
 #include "Fighter.hpp"
 
-Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0) {
+Fighter :: Fighter(std::string const name, ElementalAttribute const elementalAttribute, int const maxhp, int const atk, int const def, int const spd) : Character(name, elementalAttribute, maxhp, atk, def, spd), exp(0), skillPoint(0) {
     this->updateReqExp();
     this->buildAttackMethod();
 }
@@ -68,13 +68,12 @@ void Fighter :: updateLevel() {
         updateExp();
         levelUp();
         updateReqExp();
-
-        std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
     }
 }
 
 void Fighter :: levelUp() {
     this->level++;
+    std::cout << "LEVELUP!!! : " << this->level-1 << " > " << this->level << std::endl;
     updateSkillPoint();
 }
 
@@ -90,7 +89,7 @@ int Fighter :: calcReqExpAmount() {
 void Fighter :: updateSkillPoint() {
     const int skillPointIncreaseAmount = 5;
     const int totalSkillPoint = this->skillPoint + skillPointIncreaseAmount;
-    std::cout << "SKILL POINTS INCREASED : " << this->skillPoint << " > " << totalSkillPoint;
+    std::cout << "SKILL POINTS INCREASED : " << this->skillPoint << " > " << totalSkillPoint << std::endl;
     this->skillPoint = totalSkillPoint;
 }
 

@@ -1,6 +1,5 @@
 class StoryTextInterface {
     private:
     public:
-        virtual void showStoryText() = 0;
+        virtual void printStoryText(std::string fileName);
 };
-

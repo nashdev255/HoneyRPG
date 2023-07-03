@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 
 void StoryTextInterface :: printStoryText(std::string fileName) {
     std::fstream myFile;
@@ -14,4 +13,11 @@ void StoryTextInterface :: printStoryText(std::string fileName) {
         }
         myFile.close();
     }
+}
+
+/**
+ * すべてのテキストファイルを読み込む
+*/
+void StoryTextInterface :: loadAllStoryText() {
+
 }

@@ -4,38 +4,28 @@
 #include <filesystem>
 #include <fstream>
 
-namespace fs = std::filesystem;
-
 StoryTextInterface :: StoryTextInterface() {
     std::string folderPath = "./Lines/";
 
-    for(const auto& entry : fs::directory_iterator(folderPath)) {
+    for(const auto& entry : std::filesystem::directory_iterator(folderPath)) {
         if(entry.is_regular_file() && entry.path().extension() == ".txt") {
+            std::string fileName = entry.path().filename().stem().string();
+            fileNames.push_back(fileName);
             std::ifstream file(entry.path());
             if(file.is_open()) {
                 std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-                lineText.push_back(content);
+                lineTexts.push_back(content);
                 file.close();
             }
         }
     }
-}
 
-/**
- * すべてのテキストファイルを読み込む
-*/
-void StoryTextInterface :: loadAllStoryText() {
-    
+    for(int i=0;i<fileNames.size();i++) {
+        npcText.insert(std::make_pair(fileNames[i], lineTexts[i]));
+    }
 }
 
 void StoryTextInterface :: printStoryText(std::string fileName) {
-    std::fstream myFile;
-    myFile.open(fileName, std::ios::in);
-    if(myFile.is_open()) {
-        std::string line;
-        while(getline(myFile, line)) {
-            std::cout << line << std::endl;
-        }
-        myFile.close();
-    }
+    std::string lineText = npcText.at(fileName);
+    std::cout << lineText << std::endl;
 }

@@ -1,10 +1,13 @@
 #pragma once
+#include <map>
 #include <vector>
 #include <string>
 
 class StoryTextInterface {
     private:
-        std::vector<std::string> storyText;
+        std::vector<std::string> fileName;
+        std::vector<std::string> lineText;
+        std::map<std::string, std::string> npcText;
 
     private:
         void loadAllStoryText();

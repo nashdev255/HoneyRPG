@@ -19,7 +19,6 @@ void ElementalAttribute :: initElementNames() {
 }
 
 ElementalReaction ElementalAttribute :: ElementalReact(ElementalAttributeList otherElement) {
-    // std::cout << this->getElementAsString(this->element) << ':' << this->getElementAsString(otherElement) << std::endl;
     if(this->canNoneReactBy(otherElement)) return NoneReact;
     if(this->canSaturateBy(otherElement)) return Saturate;
     if(this->canEvaporateBy(otherElement)) return Evaporate;

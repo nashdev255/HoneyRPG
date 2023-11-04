@@ -64,7 +64,6 @@ void BattleField :: endBattle() {
 
 bool BattleField :: canEndBattle() {
     if(fighter->isAlive() == false || monster->isAlive() == false) return true;
-    std::cout << "debug" << std::endl;
     return false;
 }
 

@@ -28,6 +28,8 @@ class Character {
 
         void showStatus();
 
+        virtual void attack() = 0;
+
         virtual void damagedBy(Character& attacker);
         virtual void damagedMessage(int const damagePoint) {};
         void dead();

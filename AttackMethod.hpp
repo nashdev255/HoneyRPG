@@ -13,10 +13,10 @@ class AttackMethod {
 
     public:
         AttackMethod() {};
-        AttackMethod(std::string name, ElementalAttributeList element, int power);
+        AttackMethod(std::string& name, ElementalAttributeList element, int power);
         virtual ~AttackMethod() {};
 
-        void setParams(std::string name, ElementalAttributeList element, int power);
+        void setParams(std::string& name, ElementalAttributeList element, int power);
         void action(Character& attacker, Character& target);
 
         // getter, setter
